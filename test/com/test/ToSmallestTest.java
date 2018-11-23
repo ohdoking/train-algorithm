@@ -12,10 +12,13 @@ public class ToSmallestTest {
     @Test
     public void test() {
         System.out.println("Basic Tests smallest");
-        testing(261235, "[126235, 2, 0]");
-        testing(209917, "[29917, 0, 1]");
-        testing(285365, "[238565, 3, 1]");
-        testing(269045, "[26945, 3, 0]");
-        testing(296837, "[239687, 4, 1]");
+//        testing(261235, "[126235, 2, 0]");
+//        testing(209917, "[29917, 0, 1]");
+//        testing(285365, "[238565, 3, 1]");
+//        testing(269045, "[26945, 3, 0]");
+//        testing(296837, "[239687, 4, 1]");
+//        testing(199819884, "[119989884, 4, 0]");
+//        testing(585575393, "358557539, 0, 8");
+        testing(358557530, "35855753, 0, 8");
     }
 }
