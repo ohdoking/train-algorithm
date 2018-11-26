@@ -32,8 +32,13 @@ class Solution10 {
 			int tempResult = 0;
 			for(int j = start ; j < end ; j++){
 				tempResult = tempResult+A[j];
-			}			
-			count += tempResult / K;
+				if(tempResult >= K) {
+					count++;
+					tempResult = 0;
+				}
+			}	
+			//@ fix random value exception .
+			//count += tempResult / K;
 			
 		}
 		
