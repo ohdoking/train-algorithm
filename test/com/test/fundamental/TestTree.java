@@ -6,10 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import com.test.fundamental.Tree.TreeKind;
+
 /**
- *      1
- *   2     3
- *  4 5
+
  * 
  * @author ohdoking
  *
@@ -19,6 +19,16 @@ class TestTree {
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		
+		/**
+		 * 
+		 * Test Tree Structure
+		 * 
+		 *     1
+		 *   2     3
+		 *  4 5
+		 *  
+		 */
 		 tree = new Tree(5);
 		 NodeInTree n4 = tree.init(4, null, null);
 		 NodeInTree n5 = tree.init(5, null, null);
@@ -31,17 +41,17 @@ class TestTree {
 	
 	@Test
 	void testInOrder() {
-		assertArrayEquals(tree.inOrder(), new int[] {4,2,5,1,3});
+		assertArrayEquals(tree.order(TreeKind.Inorder), new int[] {4,2,5,1,3});
 	}
 	
 	@Test
 	void testPreOrder() {
-		assertArrayEquals(tree.preOrder(), new int[] {1,2,4,5,3});
+		assertArrayEquals(tree.order(TreeKind.Preorder), new int[] {1,2,4,5,3});
 	}
 	
 	@Test
 	void testPostOrder() {
-		assertArrayEquals(tree.postOrder(), new int[] {4,5,2,3,1});
+		assertArrayEquals(tree.order(TreeKind.Postorder), new int[] {4,5,2,3,1});
 	}
 	
 	

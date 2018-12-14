@@ -15,29 +15,66 @@ package com.test.fundamental;
  */
 public class Tree {
 	
+	/**
+	 * Tree Traversals kinds
+	 * 
+	 */
+	public enum TreeKind{
+		Inorder, Preorder, Postorder
+	}
+	
 	public NodeInTree root;
 	
 	public int[] treeResult;
 	private int index = 0;
+	private int nodeIndex = 0;
 	
 	public Tree(int length) {
 		treeResult = new int[length];
 	}
 	
+	/**
+	 * node init
+	 * 
+	 * @param data
+	 * @param left
+	 * @param right
+	 * @return
+	 */
 	public NodeInTree init(int data, NodeInTree left, NodeInTree right) {
 		return new NodeInTree(data, left, right);
 	}
 	
+	/**
+	 * set root node in tree
+	 * @param root
+	 */
 	public void setRootNode(NodeInTree root) {
 		this.root = root;
 	}
 
-	public int[] inOrder() {
-		inOrder(root);
+	public int[] order(TreeKind treeKind){
+		switch (treeKind) {
+		case Inorder:
+			inOrder(root);
+			break;
+		case Preorder:
+			preOrder(root);
+			break;
+		case Postorder:
+			postOrder(root);
+			break;
+		default:
+			break;
+		}
+		
 		return treeResult;
 	}
 	
-
+	/**
+	 * InOrder 
+	 * @param node
+	 */
 	public void inOrder(NodeInTree node) {
 		
 		if(node != null ) {
@@ -47,13 +84,10 @@ public class Tree {
 		}
 	}
 	
-	public int[] preOrder() {
-		preOrder(root);
-		return treeResult;
-	}
-
-
-	
+	/**
+	 * PreOrder 
+	 * @param node
+	 */
 	public void preOrder(NodeInTree node) {
 		
 		if(node != null ) {
@@ -63,12 +97,10 @@ public class Tree {
 		}
 	}
 	
-	public int[] postOrder() {
-		postOrder(root);
-		return treeResult;
-	}
-
-	
+	/**
+	 * PostOrder 
+	 * @param node
+	 */
 	public void postOrder(NodeInTree node) {
 		
 		if(node != null ) {
