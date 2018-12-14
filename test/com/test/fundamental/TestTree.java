@@ -1,12 +1,11 @@
 package com.test.fundamental;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import com.test.fundamental.Tree.TreeKind;
+import com.test.fundamental.Tree.TreeOrderType;
 
 /**
 
@@ -41,17 +40,17 @@ class TestTree {
 	
 	@Test
 	void testInOrder() {
-		assertArrayEquals(tree.order(TreeKind.Inorder), new int[] {4,2,5,1,3});
+		assertArrayEquals(tree.order(TreeOrderType.Inorder), new int[] {4,2,5,1,3});
 	}
 	
 	@Test
 	void testPreOrder() {
-		assertArrayEquals(tree.order(TreeKind.Preorder), new int[] {1,2,4,5,3});
+		assertArrayEquals(tree.order(TreeOrderType.Preorder), new int[] {1,2,4,5,3});
 	}
 	
 	@Test
 	void testPostOrder() {
-		assertArrayEquals(tree.order(TreeKind.Postorder), new int[] {4,5,2,3,1});
+		assertArrayEquals(tree.order(TreeOrderType.Postorder), new int[] {4,5,2,3,1});
 	}
 	
 	

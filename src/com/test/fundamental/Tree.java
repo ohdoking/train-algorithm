@@ -19,7 +19,7 @@ public class Tree {
 	 * Tree Traversals kinds
 	 * 
 	 */
-	public enum TreeKind{
+	public enum TreeOrderType{
 		Inorder, Preorder, Postorder
 	}
 	
@@ -51,7 +51,14 @@ public class Tree {
 		this.root = root;
 	}
 
-	public int[] order(TreeKind treeKind){
+	/**
+	 * 
+	 * order in tree
+	 * 
+	 * @param treeKind type of order in tree
+	 * @return
+	 */
+	public int[] order(TreeOrderType treeKind){
 		treeResult = new int[nodeIndex];
 		
 		switch (treeKind) {
