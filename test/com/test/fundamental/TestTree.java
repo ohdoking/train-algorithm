@@ -29,7 +29,7 @@ class TestTree {
 		 *  4 5
 		 *  
 		 */
-		 tree = new Tree(5);
+		 tree = new Tree();
 		 NodeInTree n4 = tree.init(4, null, null);
 		 NodeInTree n5 = tree.init(5, null, null);
 		 NodeInTree n2 = tree.init(2, n4, n5);

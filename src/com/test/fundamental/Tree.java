@@ -29,10 +29,6 @@ public class Tree {
 	private int index = 0;
 	private int nodeIndex = 0;
 	
-	public Tree(int length) {
-		treeResult = new int[length];
-	}
-	
 	/**
 	 * node init
 	 * 
@@ -42,6 +38,8 @@ public class Tree {
 	 * @return
 	 */
 	public NodeInTree init(int data, NodeInTree left, NodeInTree right) {
+		//when node add, nodeIndex count increase
+		nodeIndex++;
 		return new NodeInTree(data, left, right);
 	}
 	
@@ -54,6 +52,8 @@ public class Tree {
 	}
 
 	public int[] order(TreeKind treeKind){
+		treeResult = new int[nodeIndex];
+		
 		switch (treeKind) {
 		case Inorder:
 			inOrder(root);
