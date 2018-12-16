@@ -6,6 +6,10 @@ public class NodeInTree {
 	private NodeInTree left;
 	private NodeInTree right;
 	
+	public NodeInTree(int data) {
+		this.data = data;
+	}
+	
 	public NodeInTree(int data, NodeInTree left, NodeInTree right) {
 		super();
 		this.data = data;
