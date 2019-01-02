@@ -1,4 +1,7 @@
 package com.test;
+
+import java.util.stream.IntStream;
+
 /**
  * 
  * @author ohdoking
@@ -49,15 +52,28 @@ package com.test;
  */
 class Solution14 {
     public int solution(int[] A) {
-        // write your code in Java SE 8
-    	
+
     	int result = Integer.MAX_VALUE;
     	
-    	for(int i = 0 ; i < A.length; i++) {
-    		for(int j = i ; j < A.length; j++) {
-    			int tempAbsSum = Math.abs(A[i] + A[j]);
-    			result = tempAbsSum < result ? tempAbsSum  : result;
-        	}
+    	A = IntStream
+    			.of(A)
+    			.sorted()
+    			.distinct()
+    			.toArray();
+    	
+    	int start = 0 ;
+    	int end = A.length - 1 ;
+    	
+    	while(start <= end) {
+    		int tempSum = A[start] + A[end];
+    		result = Math.min(Math.abs(tempSum), result);
+    		
+    		if(tempSum <= 0) {
+    			start += 1;
+    		}
+    		else{
+    			end -= 1;
+    		}
     	}
     	
     	return result;
