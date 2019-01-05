@@ -58,7 +58,6 @@ class Solution14 {
     	A = IntStream
     			.of(A)
     			.sorted()
-    			.distinct()
     			.toArray();
     	
     	int start = 0 ;
