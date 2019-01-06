@@ -27,4 +27,20 @@ class Solution8 {
 		
 		return highestAmplitudeSeason;
     }
+	
+	enum Season{
+		SPRING("SPRING",2), SUMMER("SUMMER",3), AUTUMN("AUTUMN",4), WINTER("WINTER",1);
+		
+		String season;
+		int value;
+		
+		private Season(String season, int value) {
+			this.season = season;
+			this.value = value;
+		}
+		
+		public String getSeason(int value) {
+			return season;
+		}
+	}
 }
