@@ -29,5 +29,20 @@ class TestDecoratorStream {
             }
         }
 	}
+	
+	@Test
+	void testMuitipleWrite() throws IOException{
+		byte[] message = new byte[]{0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21};
+		byte[] message2 = new byte[]{0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21};
+		try(ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+			DecoratorStream decoratorStream = new DecoratorStream(baos, "First line: ");
+			decoratorStream.write(message);
+			decoratorStream.write(message2);
+			
+			try(BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(baos.toByteArray()), "UTF-8"))) {
+				assertEquals("First line: Hello, world!Hello, world!", reader.readLine());
+			}
+		}
+	}
 
 }
