@@ -16,4 +16,21 @@ public class CaesarCipherTest {
 		assertEquals(u, CaesarCipher.demovingShift(CaesarCipher.movingShift(u, 1), 1)); 
 	}
 	
+	@Test
+	public void test2() {
+		String u = "uaoQop jx eh osr okaKv vzagzwpxagokBKriipmc U";
+		int shift = 2;
+		List<String> v = Arrays.asList("wdsVuw sh", " qu dii h", "evGs uzbi", "caudhoxuM", "Wewxfdu O");
+		assertEquals(v, CaesarCipher.movingShift(u, shift));
+		assertEquals(u, CaesarCipher.demovingShift(CaesarCipher.movingShift(u, shift), shift)); 
+	}
+	
+	@Test
+	public void test3() {
+		String u = " uoxIirmoveNreefckgieaoiEcooqo";
+		int shift = 2;
+		List<String> v = Arrays.asList(" xscOp", "zvygqA", "ftuwud", "adaxmh", "Edqrut");
+		assertEquals(v, CaesarCipher.movingShift(u, shift));
+		assertEquals(u, CaesarCipher.demovingShift(CaesarCipher.movingShift(u, shift), shift)); 
+	}
 }

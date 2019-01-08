@@ -31,9 +31,13 @@ public class CaesarCipher {
 		
 		char[] stringArray = shiftString(s, shift , Mode.MOVING);
 		
-		
 		List<String> list = new ArrayList<String>();
-		int lenght = stringArray.length / split + 1;
+		
+		//seperate by 5
+		int lenght = stringArray.length / split;
+		if(stringArray.length - lenght * 4 > lenght) {
+			lenght = stringArray.length / split + 1;
+		}
 		for(int i = 0 ; i < split ; i ++) {
 			if(i + 1 == split) {
 				list.add(new String(stringArray, lenght * i, stringArray.length - lenght * i));
