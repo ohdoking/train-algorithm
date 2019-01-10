@@ -32,6 +32,17 @@ public class EnoughIsEnoughTest {
 				new int[] { },
 				EnoughIsEnough.deleteNth( new int[] { }, 5 )
 		);
+		
+
+	}
+	
+	@Test
+	public void delete0th() throws Exception {
+		
+		assertArrayEquals(
+				new int[] { },
+				EnoughIsEnough.deleteNth( new int[] { 1, 1, 1, 1, 1 }, 0 )
+		);
 
 	}
 	

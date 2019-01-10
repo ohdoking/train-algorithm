@@ -23,19 +23,22 @@ import java.util.Map;
  * Example
  * EnoughIsEnough.deleteNth(new int[] {20,37,20,21}, 1) // return [20,37,21]
  * EnoughIsEnough.deleteNth(new int[] {1,1,3,3,7,2,2,2,2}, 3) // return [1, 1, 3, 3, 7, 2, 2, 2]
+ * 
  */
 public class EnoughIsEnough {
 
 	public static int[] deleteNth(int[] elements, int maxOccurrences) {
 		
 		List<Integer> list = new ArrayList<Integer>();
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>(); 
-		for(int i = 0 ; i < elements.length ; i++) {
-			int temp = elements[i];
-			if(map.get(temp) == null || map.get(temp) < maxOccurrences) {
-				list.add(temp);
-				map.put(temp, map.get(temp) == null ? 1 : map.get(temp)+1);
-				continue;
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		// deal with exceptions in case that is maxOccurrences == 0
+		if(maxOccurrences != 0) {
+			for(int i = 0 ; i < elements.length ; i++) {
+				int temp = elements[i];
+				if(map.get(temp) == null || map.get(temp) < maxOccurrences) {
+					list.add(temp);
+					map.put(temp, map.get(temp) == null ? 1 : map.get(temp)+1);
+				}
 			}
 		}
 		
