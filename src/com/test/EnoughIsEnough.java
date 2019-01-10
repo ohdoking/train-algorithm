@@ -37,7 +37,7 @@ public class EnoughIsEnough {
 				int temp = elements[i];
 				if(map.get(temp) == null || map.get(temp) < maxOccurrences) {
 					list.add(temp);
-					map.put(temp, map.get(temp) == null ? 1 : map.get(temp)+1);
+					map.put(temp, map.getOrDefault(temp, 0) + 1);
 				}
 			}
 		}
