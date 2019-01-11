@@ -34,7 +34,6 @@ public class Solution15 {
 		for (int i = 0; i < moves.length; i++) {
 			String move = moves[i];
 			
-			
 			switch (move) {
 				case "up":
 					y = y == 0 ? 0 : --y; 
