@@ -85,7 +85,6 @@ public class Snail {
     public static int[] snail(int[][] array) {
     	
     	int length = array[0].length;
-    	int snailLength = array[0].length;
     	
     	int[] result = new int[length * length];
     	//start is right way
@@ -95,16 +94,18 @@ public class Snail {
     	int index = 0;
     	
     	// 3-5 , 4-7, 5-9, 6-11, 7-13
-    	for(int i = 0 ; i < length * 2 - 1; i++) {
-    		//set snail length
+    	// array[0].length * 2 - 1 is circle spin count like above rule
+    	for(int i = 0 ; i < array[0].length * 2 - 1; i++) {
+    		//set snail length, decrease like blow rule
+    		//[3 22 1 / 5 44 33 22 1]
     		if(i%2 == 1) {
-    			snailLength--;
+    			length--;
     		}
     		
-    		for(int j = 0 ; j < snailLength; j++) {
+    		for(int j = 0 ; j < length; j++) {
     			result[index++] = array[point.x][point.y];
     			//if j is last length, it change direction
-    			if(j == snailLength - 1) {
+    			if(j == length - 1) {
     				direction = direction.changeNextState();
     			}
     			direction.movePosition(point);
