@@ -31,56 +31,84 @@ import java.awt.Point;
  *	NOTE 2: The 0x0 (empty matrix) is represented as [[]]
  */
 public class Snail {
+	
+	enum Spin{
+		RIGHT {
+			@Override
+			Spin changeNextState() {
+				return Spin.DOWN;
+			}
+
+			@Override
+			void movePosition(Point point) {
+				point.setLocation(point.getX(), point.getY()+1);
+			}
+		}, DOWN {
+			@Override
+			Spin changeNextState() {
+				return Spin.LEFT;
+			}
+
+			@Override
+			void movePosition(Point point) {
+				point.setLocation(point.getX()+1, point.getY());
+				
+			}
+		}, LEFT {
+			@Override
+			Spin changeNextState() {
+				return Spin.UP;
+			}
+
+			@Override
+			void movePosition(Point point) {
+				point.setLocation(point.getX(), point.getY()-1);
+				
+			}
+		}, UP {
+			@Override
+			Spin changeNextState() {
+				return Spin.RIGHT;
+			}
+
+			@Override
+			void movePosition(Point point) {
+				point.setLocation(point.getX()-1, point.getY());
+				
+			}
+		};
+		
+		abstract Spin changeNextState();
+		abstract void movePosition(Point point);
+	}
 
     public static int[] snail(int[][] array) {
     	
-    	int[] result = new int[array[0].length * array[0].length];
-    	if(array[0].length == 0) {
-    		return result;
-    	}
-    	int index = 0;
+    	int length = array[0].length;
+    	int snailLength = array[0].length;
+    	
+    	int[] result = new int[length * length];
+    	//start is right way
+    	Spin direction = Spin.RIGHT;
+    	//start point is 0,0
     	Point point = new Point(0, 0);
-    	int direction = 0;
-    	// 0 : right > 1 : down > 2 : left > 3 : up
-    	int length = array.length;
-    	// 3-5 , 4-7, 5-9, 6-11
-    	for(int i = 0 ; i < array.length * 2 - 1; i++) {
+    	int index = 0;
+    	
+    	// 3-5 , 4-7, 5-9, 6-11, 7-13
+    	for(int i = 0 ; i < length * 2 - 1; i++) {
     		//set snail length
     		if(i%2 == 1) {
-    			length--;
+    			snailLength--;
     		}
     		
-    		for(int j = 0 ; j < length; j++) {
+    		for(int j = 0 ; j < snailLength; j++) {
     			result[index++] = array[point.x][point.y];
-    			//set direction
-    			if(j == length - 1) {
-    				direction = (i + 1) % 4;
+    			//if j is last length, it change direction
+    			if(j == snailLength - 1) {
+    				direction = direction.changeNextState();
     			}
-    			switch (direction) {
-    			//right
-    			case 0:
-    				point.setLocation(point.getX(), point.getY()+1);
-    				break;
-    				//down
-    			case 1:
-    				point.setLocation(point.getX()+1, point.getY());
-    				break;
-    				//left
-    			case 2:
-    				point.setLocation(point.getX(), point.getY()-1);
-    				break;
-    				//up
-    			case 3:
-    				point.setLocation(point.getX()-1, point.getY());
-    				break;
-    				
-    			default:
-    				break;
-    			}
-    			
-    			
+    			direction.movePosition(point);
     		}
-    		
     	}
     	return result;
    } 
