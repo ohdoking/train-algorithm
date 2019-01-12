@@ -8,63 +8,79 @@ public class BaseBallUsingEnum {
 
 	enum Baseball{
 		
-		INIT;
+		INIT(Strike.ZERO_STRIKE, Ball.ZERO_BALL);
 		
-		enum STRIKE{
+		private Strike strike;
+		private Ball ball;
+		
+		private Baseball(Strike strike, Ball ball) {
+			this.strike = strike;
+			this.ball = ball;
+		}
+		
+		public Strike getStrike() {
+			return strike;
+		}
+		
+		public Ball getBall() {
+			return ball;
+		}
+		
+		enum Strike{
 			ZERO_STRIKE {
 				@Override
-				STRIKE strike() {
-					return STRIKE.ONE_STRIKE;
+				Strike strike() {
+					return Strike.ONE_STRIKE;
 				}
 			},
 			ONE_STRIKE {
 				@Override
-				STRIKE strike() {
-					return STRIKE.TWO_STRIKE;
+				Strike strike() {
+					return Strike.TWO_STRIKE;
 				}
 			}, TWO_STRIKE {
 				@Override
-				STRIKE strike() {
-					return STRIKE.THREE_STRIKE;
+				Strike strike() {
+					return Strike.THREE_STRIKE;
 				}
 			}, THREE_STRIKE {
 				@Override
-				STRIKE strike() {
+				Strike strike() {
 					return null;
 				}
 			};
-			abstract STRIKE strike();
+			abstract Strike strike();
 		}
 		
-		enum BALL{
+		enum Ball{
 			ZERO_BALL {
 				@Override
-				BALL ball() {
-					return BALL.ONE_BALL;
+				Ball ball() {
+					return Ball.ONE_BALL;
 				}
 			},
 			ONE_BALL {
 				@Override
-				BALL ball() {
-					return BALL.TWO_BALL;
+				Ball ball() {
+					return Ball.TWO_BALL;
 				}
 			}, TWO_BALL {
 				@Override
-				BALL ball() {
-					return BALL.THREE_BALL;
+				Ball ball() {
+					return Ball.THREE_BALL;
 				}
 			}, THREE_BALL {
 				@Override
-				BALL ball() {
-					return BALL.FOUR_BALL;
+				Ball ball() {
+					return Ball.FOUR_BALL;
 				}
 			}, FOUR_BALL {
 				@Override
-				BALL ball() {
+				Ball ball() {
 					return null;
 				}
 			};
-			abstract BALL ball();
+			abstract Ball ball();
 		};
 		
 	}
@@ -72,15 +88,16 @@ public class BaseBallUsingEnum {
 	
 	public static void main(String[] args) {
 		
-		STRIKE strike = STRIKE.ZERO_STRIKE;
-		BALL ball = BALL.ZERO_BALL;
+		Baseball baseball = Baseball.INIT;
+		Strike strike = baseball.getStrike();
+		Ball ball = baseball.getBall();
 	
 		Random r = new Random();
 		int lowerBound = 0;
 		int upperBound = 2;
 		
 		while(true) {
-			if(strike == STRIKE.THREE_STRIKE || ball == BALL.FOUR_BALL) {
+			if(strike == Strike.THREE_STRIKE || ball == Ball.FOUR_BALL) {
 				System.out.println(strike.toString() + " / " + ball.toString());
 				break;
 			}
