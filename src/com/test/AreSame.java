@@ -52,7 +52,7 @@ public class AreSame {
 	public static boolean comp(int[] a, int[] b) {
 
 		// If a or b are null, the problem doesn't make sense so return false.
-		if (a == null || b == null) {
+		if (a == null || b == null || a.length != b.length) {
 			return false;
 		}
 

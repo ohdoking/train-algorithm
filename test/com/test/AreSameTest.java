@@ -60,6 +60,12 @@ public class AreSameTest {
 		assertEquals(true, AreSame.comp(a, b)); 
 	}
 	
+	
+	@Test
+	public void testNull() {
+		assertEquals(false, AreSame.comp(null, null));
+	}
+	
 	@Test
 	public void test8() {
 		int[] a = new int[]{-14,0,1,19,144,161,191,195};
@@ -68,6 +74,13 @@ public class AreSameTest {
 		assertEquals(true, AreSame.comp(a, b)); 
 	}
 	
+	@Test
+	public void testDifferentLength() {
+		int[] a = new int[]{-14,0,1,19,144,161,191,195};
+		int[] b = new int[]{0, 1, 196, 361, 20736, 25921, 36481};
+		
+		assertEquals(false, AreSame.comp(a, b)); 
+	}
 	
 	@Test
 	public void test11() {
