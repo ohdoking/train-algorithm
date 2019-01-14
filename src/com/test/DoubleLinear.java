@@ -1,8 +1,7 @@
 package com.test;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * 
@@ -29,80 +28,18 @@ import java.util.List;
  */
 class DoubleLinear {
 
-	public enum XY{
-		
-		
-		X2 {
-			@Override
-			XY setValue(int value) {
-				this.value = 2 * value + 1;
-				return this;
-			}
-
-			@Override
-			void setList(List<Integer> list) {
-				this.setData(list, getValue());
-			}
-		}, X3 {
-			@Override
-			XY setValue(int value) {
-				this.value = 3 * value + 1;
-				return this;
-			}
-
-			@Override
-			void setList(List<Integer> list) {
-				this.setData(list, getValue());
-			}
-		};
-		
-		protected int value;
-		
-		public int getValue() {
-			return this.value;
-		}
-		
-		protected void setData(List<Integer> list, int value) {
-				
-				int index = 0;
-				for(int i = list.size() - 1 ; i >= 0; i--) {
-					if(i == list.size() - 1 && list.get(i) < value) {
-						index = list.size();
-						break;
-					}
-					else if(list.get(i) == value) {
-						index = Integer.MAX_VALUE;
-						break;
-					}
-					else if(list.get(i) < value) {
-						index =  i + 1;
-						break;
-					}
-				}
-				
-				if(Integer.MAX_VALUE != index) {
-					list.add(index, value);
-				}
-		}
-		
-		abstract XY setValue(int value);
-		abstract void setList(List<Integer> list);
-		
-	}
-	
 	public static int dblLinear(int n) {
-		
-		List<Integer> list = new LinkedList<Integer>();
-		list.add(1);
-		
-		int index = 0;
-		while(index != n) {
-			int value = list.get(index++);
-			for (XY xy : XY.values()) {
-				xy.setValue(value).setList(list);
-			}
+		if (n == 0) {
+			return 1;
 		}
-		
-		return list.get(n).intValue();
+		SortedSet<Integer> u = new TreeSet<>();
+		u.add(1);
+		for (int i = 0; i < n; i++) {
+			int x = u.first();
+			u.add(x * 2 + 1);
+			u.add(x * 3 + 1);
+			u.remove(x);
+		}
+		return u.first();
 	}
 }
