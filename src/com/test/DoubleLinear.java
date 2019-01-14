@@ -29,6 +29,67 @@ import java.util.List;
  */
 class DoubleLinear {
 
+	public enum XY{
+		
+		
+		X2 {
+			@Override
+			XY setValue(int value) {
+				this.value = 2 * value + 1;
+				return this;
+			}
+
+			@Override
+			void setList(List<Integer> list) {
+				this.setData(list, getValue());
+			}
+		}, X3 {
+			@Override
+			XY setValue(int value) {
+				this.value = 3 * value + 1;
+				return this;
+			}
+
+			@Override
+			void setList(List<Integer> list) {
+				this.setData(list, getValue());
+			}
+		};
+		
+		protected int value;
+		
+		public int getValue() {
+			return this.value;
+		}
+		
+		protected void setData(List<Integer> list, int value) {
+				
+				int index = 0;
+				for(int i = list.size() - 1 ; i >= 0; i--) {
+					if(i == list.size() - 1 && list.get(i) < value) {
+						index = list.size();
+						break;
+					}
+					else if(list.get(i) == value) {
+						index = Integer.MAX_VALUE;
+						break;
+					}
+					else if(list.get(i) < value) {
+						index =  i + 1;
+						break;
+					}
+				}
+				
+				if(Integer.MAX_VALUE != index) {
+					list.add(index, value);
+				}
+		}
+		
+		abstract XY setValue(int value);
+		abstract void setList(List<Integer> list);
+		
+	}
+	
 	public static int dblLinear(int n) {
 		
 		List<Integer> list = new LinkedList<Integer>();
@@ -37,29 +98,11 @@ class DoubleLinear {
 		int index = 0;
 		while(index != n) {
 			int value = list.get(index++);
-			if(!list.contains(2 * value + 1)) {
-				int tempIndex = getIndex(list, 2 * value + 1);
-				list.add(tempIndex, 2 * value + 1);
+			for (XY xy : XY.values()) {
+				xy.setValue(value).setList(list);
 			}
-			if(!list.contains(3 * value + 1)) {
-				int tempIndex = getIndex(list, 3 * value + 1);
-				list.add(tempIndex, 3 * value + 1);
-			}
-			//Collections.sort(list);
 		}
 		
-		return list.stream().mapToInt(Integer::intValue).toArray()[n];
-	}
-	
-	private static int getIndex(List<Integer> list, int value) {
-		for(int i = list.size() - 1 ; i >= 0; i--) {
-			if(i == list.size() - 1 && list.get(i) < value) {
-				return list.size();
-			}
-			else if(list.get(i) < value ) {
-				return i + 1;
-			}
-		}
-		return 0;
+		return list.get(n).intValue();
 	}
 }
