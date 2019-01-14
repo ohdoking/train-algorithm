@@ -20,10 +20,7 @@ public class DoubleLinearTest {
     }
     @Test
     public void test2() {
-    	//447 446, 3 / 2 -> 223  
-    	//471 470  3 / 2 -> 235
-    	//463 462  3 / 2 -> 231, 154
-    	testing(DoubleLinear.dblLinear(100), 447);
+    	testing(DoubleLinear.dblLinear(10000), 157654);
     	
     }
 }
