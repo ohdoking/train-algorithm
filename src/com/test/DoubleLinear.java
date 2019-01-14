@@ -31,21 +31,35 @@ class DoubleLinear {
 
 	public static int dblLinear(int n) {
 		
-		List<Integer> arr = new LinkedList<Integer>();
-		arr.add(1);
+		List<Integer> list = new LinkedList<Integer>();
+		list.add(1);
 		
 		int index = 0;
 		while(index != n) {
-			int value = arr.get(index++);
-			if(!arr.contains(2 * value + 1)) {
-				arr.add(2 * value + 1);
+			int value = list.get(index++);
+			if(!list.contains(2 * value + 1)) {
+				int tempIndex = getIndex(list, 2 * value + 1);
+				list.add(tempIndex, 2 * value + 1);
 			}
-			if(!arr.contains(3 * value + 1)) {
-				arr.add(3 * value + 1);
+			if(!list.contains(3 * value + 1)) {
+				int tempIndex = getIndex(list, 3 * value + 1);
+				list.add(tempIndex, 3 * value + 1);
 			}
-			Collections.sort(arr);
+			//Collections.sort(list);
 		}
 		
-		return arr.stream().mapToInt(Integer::intValue).toArray()[n];
+		return list.stream().mapToInt(Integer::intValue).toArray()[n];
+	}
+	
+	private static int getIndex(List<Integer> list, int value) {
+		for(int i = list.size() - 1 ; i >= 0; i--) {
+			if(i == list.size() - 1 && list.get(i) < value) {
+				return list.size();
+			}
+			else if(list.get(i) < value ) {
+				return i + 1;
+			}
+		}
+		return 0;
 	}
 }
