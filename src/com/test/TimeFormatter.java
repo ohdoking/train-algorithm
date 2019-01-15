@@ -59,7 +59,7 @@ public class TimeFormatter {
 		MINUTE(60),
 		SECOND(1);
 		
-		private int seconds;
+		private int seconds = 0;
 		private int count = 0;
 		
 		Date(int seconds){
@@ -78,17 +78,19 @@ public class TimeFormatter {
 			this.count = count;
 		}
 		
-		int getDate(int seconds) {
+		int calculateCount(int seconds) {
 			setCount(seconds/getSeconds());
 			if(getCount() != 0) {
-				setCount(getCount());
-				seconds = seconds - (getSeconds() * getCount());
+				seconds %= getSeconds();
 			}
 			return seconds;
 		}
 		
-		String getHRFormat(String name, int seconds) {
-			return getCount() + " " + name + (getCount() > 1 ? "s" : "") + (seconds != 0 ? ", " : "") ;
+		String getHRFormat(int seconds) {
+			return getCount() + " " 
+						+ this.name().toLowerCase() 
+						+ (getCount() > 1 ? "s" : "") 
+						+ (seconds != 0 ? ", " : "") ;
 		}
 		
 		
@@ -99,13 +101,10 @@ public class TimeFormatter {
 		}
 		StringBuffer result = new StringBuffer();
 		for(Date day : Date.values()) {
-			seconds = day.getDate(seconds);
+			seconds = day.calculateCount(seconds);
 			
 			if(day.getCount() != 0) {
-				result = result.append(day.getHRFormat(day.name().toLowerCase(),seconds));
-			}
-			if(seconds == 0) {
-				break;
+				result = result.append(day.getHRFormat(seconds));
 			}
 			
 		}
@@ -113,7 +112,6 @@ public class TimeFormatter {
 		if(lastAnd != -1) {
 			result.replace(lastAnd, lastAnd+1, " and");
 		}
-		System.out.println(result);
 		return result.toString();
 	}
 }
