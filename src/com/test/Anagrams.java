@@ -3,7 +3,10 @@ package com.test;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -52,82 +55,101 @@ import java.util.List;
  */
 public class Anagrams {
 	
-	public State state;
-	
 	public BigInteger listPosition(String word) {
-		
-		state = new State(word);
-		
-		char[] arr = word.toCharArray();
-		Arrays.sort(arr);
-		permutation(String.valueOf(arr));	
-		
-		return new BigInteger(String.valueOf(state.getCount()));
+		return new BigInteger(String.valueOf(nPr(word.toCharArray(), word)));
 	}
 	
-	public void permutation(String str) { 
-	    permutation("", str); 
+	public long nPr(char[] arr, String word) {
+		//List<String> list = new LinkedList<>(Arrays.asList(arr));
+		
+		Set<Character> set = new HashSet<Character>();
+		for(char ch : arr){
+			set.add(ch);
+		}
+		int characterLength = set.size();
+		
+		char[] stadardWord = word.toCharArray();
+		
+		long result = 0;
+		
+		List<Character> tempList = new ArrayList<Character>();
+		for(char ch : arr){
+			tempList.add(ch);
+		}
+		Collections.sort(tempList);
+		
+		for(int i = 0 ; i < arr.length ; i++ ) {
+			//LinkedList<Character> characterList = new LinkedList<Character>(Chars.asList(string.toCharArray()));
+
+			/*
+			 * 
+			 * 
+			 * 
+			 * A B A B
+			 * AA 2!/(2!) = 1
+			 * ABAB = 1
+The number of anagrams that start with I is 10!/(3!1!2!4!) = 12600
+The number of anagrams that start with MII is 8!/(2!0!2!4!) = 420
+The number of anagrams that start with MIP is 8!/(3!0!1!4!) = 280
+The number of anagrams that start with MISI is 7!/(2!0!2!3!) = 210
+The number of anagrams that start with MISP is 7!/(3!0!1!3!) = 140
+The number of anagrams that start with MISSII is 5!/(1!0!2!2!) = 30
+The number of anagrams that start with MISSIP is 5!/(2!0!1!2!) = 30
+
+			 */
+			List<Character> tempList2 = new ArrayList<Character>(tempList);
+			for (Character charater : set) {
+				if(charater.equals(stadardWord[i])) {
+					break;
+				}
+				result += nPr(tempList2.toArray(new Character[tempList2.size()]), characterLength);
+				swap(tempList2, charater);
+			}
+			
+			tempList.remove(0);
+			set = new HashSet<Character>();
+			for(char ch : tempList){
+				set.add(ch);
+			}
+		}
+		
+		return result+1;
+	}
+	
+	private void swap(List<Character> tempList, Character charater) {
+		for(int i = 0 ; i < tempList.size() ; i++) {
+			Character firstChar = tempList.get(i);
+			if(tempList.get(i).equals(charater)) {
+				tempList.set(i, firstChar);
+				tempList.set(0, tempList.get(i));
+			}
+		}
+		
 	}
 
-	private void permutation(String prefix, String str) {
-		if(state.isState() == false) {
-			return ;
-		}
-	    int n = str.length();
-	    if (n == 0) {
-	    	if(!state.getList().contains(prefix)) {
-	    		state.getList().add(prefix);
-	    		state.setCount(state.getCount()+1);
-	    		if(state.getStdWord().equals(prefix)) {
-	    			state.setState(false);
-	    		}
-	    	}
-	    	
-	    }
-	    else {
-	        for (int i = 0; i < n; i++) {
-	        	permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n));
-	        }
-	    }
-	}
-	
-	class State{
-		private long count;
-		private String stdWord;
-		private boolean state ;
-		private List<String> list;
+	public long nPr(Character[] arr, int size) {
 		
-		public State(String word) {
-			count = 0;
-			stdWord = word;
-			state = true;
-			this.list = new ArrayList<String>();
-		}
-		public long getCount() {
-			return count;
-		}
-		public void setCount(long count) {
-			this.count = count;
-		}
-		public String getStdWord() {
-			return stdWord;
-		}
-		public void setStdWord(String stdWord) {
-			this.stdWord = stdWord;
-		}
-		public boolean isState() {
-			return state;
-		}
-		public void setState(boolean state) {
-			this.state = state;
-		}
-		public List<String> getList() {
-			return list;
-		}
-		public void setList(List<String> list) {
-			this.list = list;
+		int denominator = 1;// 분모
+		int numerator = 1;// 분자
+		
+		int[] duplicateNumber = new int[size];
+		
+		for(int i = 1 ; i < arr.length ; i++ ) {
+			denominator *= i; 
+			int data = (int)arr[i];
+			int offset = (int)'A';
+			duplicateNumber[data-offset]++;
 		}
 		
+		for(int i = 0 ; i < duplicateNumber.length ; i++) {
+			if(duplicateNumber[i] == 0) {
+				continue;
+			}
+			for(int j = 1 ; j <= duplicateNumber[i] ; j++) {
+				numerator *= j;
+			}
+		}
 		
+		return denominator/numerator;
 	}
 }
