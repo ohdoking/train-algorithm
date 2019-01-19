@@ -1,14 +1,12 @@
 package com.test;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * 
@@ -61,9 +59,9 @@ public class Anagrams {
 		return new BigInteger(String.valueOf(nPr(word.toCharArray(), word)));
 	}
 	
-	public long nPr(char[] arr, String word) {
+	public BigInteger nPr(char[] arr, String word) {
 		
-		long result = 0;
+		BigInteger result = BigInteger.valueOf(0);
 		
 		char[] stadardWord = word.toCharArray();
 		
@@ -71,7 +69,6 @@ public class Anagrams {
 		for(char ch : arr){
 			tempList.add(ch);
 		}
-		
 		
 		Set<Character> set = new HashSet<Character>();
 		for(char ch : arr){
@@ -82,27 +79,13 @@ public class Anagrams {
 		Collections.sort(myList);
 		
 		for(int i = 0 ; i < arr.length ; i++ ) {
-			/*
-			 * MISSISSIPPI
-			 * 
-			 * the letter frequencies are I: 4, M: 1, P: 2, S: 4, 
-			 * making a total of 11!/(4!1!2!4!) = 34650 anagrams.
-			 * 
-				The number of anagrams that start with I is 10!/(3!1!2!4!) = 12600
-				The number of anagrams that start with MII is 8!/(2!0!2!4!) = 420
-				The number of anagrams that start with MIP is 8!/(3!0!1!4!) = 280
-				The number of anagrams that start with MISI is 7!/(2!0!2!3!) = 210
-				The number of anagrams that start with MISP is 7!/(3!0!1!3!) = 140
-				The number of anagrams that start with MISSII is 5!/(1!0!2!2!) = 30
-				The number of anagrams that start with MISSIP is 5!/(2!0!1!2!) = 30
-			 */
 			List<Character> tempList2 = new ArrayList<Character>(tempList);
 			Collections.sort(tempList2);
 			for (Character charater : myList) {
 				if(charater.equals(stadardWord[i])) {
 					break;
 				}
-				result += nPr(tempList2.toArray(new Character[tempList2.size()]));
+				result.add(nPr(tempList2.toArray(new Character[tempList2.size()])));
 				swap(tempList2, charater);
 			}
 			
@@ -115,52 +98,14 @@ public class Anagrams {
 			Collections.sort(myList);
 		}
 		
-		/** 
-		 * 
-		 * QUESTION
-		 * 
-		 * [E, I, N, O, Q, S, T, U]
-		 * 
-		 * E * 7C1 5040
-		 * I * 7C1 5040
-		 * N * 7C1 5040
-		 * O * 7C1 5040
-		 * QE * 6C1 720
-		 * QI * 6C1  720
-		 * QN * 6C1 720
-		 * QO * 6C1 720
-		 * QS * 6C1 720
-		 * QT * 6C1 720
-		 * QUEI * 4C1 24
-		 * QUEN * 4C1 24
-		 * QUEO * 4C1 24
-		 * QUESI * 3C1 6
-		 * QUESN * 3C1 6
-		 * QUESO * 3C1 6
-		 * QUESTIN * 1C1 1
-		 * QUESTION 1
-		 * 
-		 * 24572
-		 * 
-		 * 
-		 * BOOKKEEPER
-		 * 
-		 * [B, E, E, E, K, K, O, O, P, R]
-		 * 
-		 * BE   8C2*2*2 5040
-		 * BK    8C3*2* 3360
-		 * BOE   7C3*2  420
-		 * BOK  7C2*2   1260
-		 * BOOE  6C2*2  180
-		 * BOOKE  5C2   60
-		 * BOOKKEEE 3C1 6
-		 * BOOKKEEPER 1
-		 * 
-		 * 1657
-		 */
-		return result+1;
+		return result.add(BigInteger.valueOf(1));
 	}
 	
+	/**
+	 * Swap data between first value and other character.
+	 * @param tempList
+	 * @param charater
+	 */
 	private void swap(List<Character> tempList, Character charater) {
 		Character firstChar = tempList.get(0);
 		for(int i = 0 ; i < tempList.size() ; i++) {
@@ -173,10 +118,18 @@ public class Anagrams {
 		
 	}
 
-	public long nPr(Character[] arr) {
+	/**
+	 * Permutation
+	 * 
+	 * Combinations Calculator (nCr)
+	 * 
+	 * @param arr
+	 * @return
+	 */
+	public BigInteger nPr(Character[] arr) {
 		
-		int denominator = 1;// 분모
-		int numerator = 1;// 분자
+		long denominator = 1;// 분모
+		long numerator = 1;// 분자
 		
 		int[] duplicateNumber = new int[26];
 		
@@ -196,6 +149,6 @@ public class Anagrams {
 			}
 		}
 		
-		return denominator/numerator;
+		return BigInteger.valueOf(denominator).divide(BigInteger.valueOf(numerator));
 	}
 }
