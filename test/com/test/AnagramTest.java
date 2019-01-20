@@ -22,4 +22,11 @@ public class AnagramTest {
 	  assertEquals("Position for 'QUESTION' incorrect", BigInteger.valueOf(24572), anagram.listPosition("QUESTION"));
 	  assertEquals("Position for 'BOOKKEEPER' incorrect", BigInteger.valueOf(10743), anagram.listPosition("BOOKKEEPER"));
   }
+  @Test
+  public void testKnownInputs3() {
+	  Anagrams anagram = new Anagrams();
+	  
+	  assertEquals("Position for 'IMMUNOELECTROPHORETICALLY' incorrect", new BigInteger("718393983731145698173"), anagram.listPosition("IMMUNOELECTROPHORETICALLY"));
+	  assertEquals("Position for 'TUPMKSXAEYOGHCAZJDDWYOYQB' incorrect", new BigInteger("229238148434660611386168"), anagram.listPosition("TUPMKSXAEYOGHCAZJDDWYOYQB"));
+  }
 }
