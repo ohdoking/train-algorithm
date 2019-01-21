@@ -1,5 +1,7 @@
 package com.test;
 
+import java.math.BigInteger;
+
 import com.test.fundamental.ListNode;
 
 /**
@@ -46,7 +48,7 @@ class Solution16 {
 		first.reverse();
 		second.reverse();
 
-		String result = String.valueOf(Integer.valueOf(first.toString()) + Integer.valueOf(second.toString()));
+		String result = new BigInteger(first.toString()).add(new BigInteger(second.toString())).toString();
 
 		char[] arr = result.toCharArray();
 		ListNode listNode = setListNode(null, 0, arr);
