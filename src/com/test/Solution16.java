@@ -49,19 +49,19 @@ class Solution16 {
 		String result = String.valueOf(Integer.valueOf(first.toString()) + Integer.valueOf(second.toString()));
 
 		char[] arr = result.toCharArray();
-		ListNode listNode = null;
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[arr.length - i - 1]);
-			if (listNode != null) {
-				listNode.setNext(new ListNode(Character.getNumericValue(arr[arr.length - i - 1])));
-			} else {
-				listNode = new ListNode(Character.getNumericValue(arr[arr.length - i - 1]));
-			}
-
-		}
-
+		ListNode listNode = setListNode(null, 0, arr);
+		
 		return listNode;
 
+	}
+	
+	private ListNode setListNode(ListNode listNode, int index , char[] arr) {
+		if(arr.length == index) {
+			return null;
+		}
+		listNode = new ListNode(Character.getNumericValue(arr[arr.length - index - 1])); 
+		listNode.setNext(setListNode(listNode, index + 1, arr));
+		return listNode;
 	}
 }
 
