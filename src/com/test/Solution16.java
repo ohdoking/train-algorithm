@@ -18,37 +18,10 @@ import com.test.fundamental.ListNode;
 class Solution16 {
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-		StringBuilder first = new StringBuilder();
-		StringBuilder second = new StringBuilder();
+		StringBuilder first = getNodeToString(l1);
+		StringBuilder second = getNodeToString(l2);
 
-		boolean state = true;
-
-		while (state) {
-			if (l1.getNext() != null) {
-				first.append(l1.getVal());
-				l1 = l1.getNext();
-			} else {
-				first.append(l1.getVal());
-				state = false;
-			}
-		}
-
-		state = true;
-
-		while (state) {
-			if (l2.getNext() != null) {
-				second.append(l2.getVal());
-				l2 = l2.getNext();
-			} else {
-				second.append(l2.getVal());
-				state = false;
-			}
-		}
-
-		first.reverse();
-		second.reverse();
-
-		String result = new BigInteger(first.toString()).add(new BigInteger(second.toString())).toString();
+		String result = new BigInteger(first.reverse().toString()).add(new BigInteger(second.reverse().toString())).toString();
 
 		char[] arr = result.toCharArray();
 		ListNode listNode = setListNode(null, 0, arr);
@@ -64,6 +37,24 @@ class Solution16 {
 		listNode = new ListNode(Character.getNumericValue(arr[arr.length - index - 1])); 
 		listNode.setNext(setListNode(listNode, index + 1, arr));
 		return listNode;
+	}
+	
+	private StringBuilder getNodeToString(ListNode listNode) {
+		
+		StringBuilder text = new StringBuilder(); 
+		boolean state = true;
+
+		while (state) {
+			if (listNode.getNext() != null) {
+				text.append(listNode.getVal());
+				listNode = listNode.getNext();
+			} else {
+				text.append(listNode.getVal());
+				state = false;
+			}
+		}
+		
+		return text;
 	}
 }
 
