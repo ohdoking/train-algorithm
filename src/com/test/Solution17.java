@@ -1,7 +1,7 @@
 package com.test;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -84,25 +84,26 @@ class Solution17 {
     	if(s.equals(" ")) {
     		return 1;
     	}
-    	StringBuilder longestText = new StringBuilder();
-    	StringBuilder tempLongestText = new StringBuilder();
+    	String longestText = "";
     	
-    	List<Character> set = new ArrayList<Character>();
+    	List<Character> list = new LinkedList<Character>();
     	char[] arr = s.toCharArray();
     	
     	for(int i = 0; i < arr.length ; i++) {
     		
-    		if(set.contains(arr[i])) {
-    			tempLongestText = new StringBuilder();
-    			set = new ArrayList<Character>();
+    		if(list.contains(arr[i])) {
+    			
+    			int index = list.indexOf(arr[i]);
+    			for(int j = 0 ; j <= index ; j++) {
+    				list.remove(0);
+    			}
     		}
     		
     		//and then restart to stack the data 
-			tempLongestText.append(arr[i]);
-			set.add(arr[i]);
+			list.add(arr[i]);
     		
-			if(longestText.length() < tempLongestText.length()) {
-				longestText = tempLongestText;
+			if(list.size() > longestText.length()) {
+				longestText = list.stream().map(e -> e.toString()).reduce("", String::concat);
 			}
     		
     	}
