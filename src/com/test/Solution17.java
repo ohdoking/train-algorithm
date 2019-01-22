@@ -75,8 +75,23 @@ import java.util.List;
  * 	set = [b]
  * 
  * 
- * this is my third solution for sovling this problems
+ * this is my third solution for solving this problems
  * 
+ * now i'm not gonna use set. cause set doesn't have order.
+ * so i'm gonna change to linked list. 
+ * 
+ * i can use other list collections but linkedlist is good collection when i should remove or insert a lot.
+ * 
+ * every time it compare between list size and the longest text size length.
+ * 
+ * and when i find a duplicate value in list, 
+ * i'm gonna remove before data until data that I found duplicate 
+ * and then add new data for making long text
+ * 
+ * repeat this process until array length equal with i
+ * 
+ * after finishing this loop
+ * i'm gonna return the longest text length.
  * 
  */
 class Solution17 {
@@ -86,7 +101,7 @@ class Solution17 {
     	}
     	String longestText = "";
     	
-    	List<Character> list = new LinkedList<Character>();
+    	LinkedList<Character> list = new LinkedList<Character>();
     	char[] arr = s.toCharArray();
     	
     	for(int i = 0; i < arr.length ; i++) {
@@ -95,7 +110,7 @@ class Solution17 {
     			
     			int index = list.indexOf(arr[i]);
     			for(int j = 0 ; j <= index ; j++) {
-    				list.remove(0);
+    				list.removeFirst();
     			}
     		}
     		
