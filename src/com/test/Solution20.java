@@ -10,6 +10,24 @@ package com.test;
  *         may assume that the maximum length of s is 1000.
  *         
  *         
+ *         first time, i thought this solution.
+ *         but before i implement i already know this solution time complex is so bad.
+ *         
+ *         so now i'm gonna think more better options for improving this solutions.
+ *         
+ *         how do you think about if i apply sliding windows solution in this problem.
+ *         i think it's not possible to apply this solution.
+ *         
+ *         i have no idea...
+ *         
+ *         and umm i'm keep trying to write here.
+ *
+ *
+ *         
+ *         
+ *        
+ *         
+ *         
  */
 class Solution20 {
 	public String longestPalindrome(String s) {
@@ -22,6 +40,7 @@ class Solution20 {
 				if(checkPalindormic(tempText)) {
 					if(tempText.length() >= longestPalindromicText.length()) {
 						longestPalindromicText = tempText;
+
 					}
 				}
 			}
