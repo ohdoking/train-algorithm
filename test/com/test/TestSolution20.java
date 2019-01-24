@@ -13,18 +13,18 @@ class TestSolution20 {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		solution20 = new Solution20(); 
+		solution20 = new Solution20();
 	}
 
 	@Test
 	void test() {
-		assertEquals("aba", solution20.longestPalindrome("babad"));
+		assertEquals("bab", solution20.longestPalindrome("babad"));
 		assertEquals("bb", solution20.longestPalindrome("cbbd"));
 	}
 	
 	@Test
 	void testAB() {
-		assertEquals("b", solution20.longestPalindrome("ab"));
+		assertEquals("a", solution20.longestPalindrome("ab"));
 	}
 	
 	@Test
