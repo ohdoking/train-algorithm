@@ -25,6 +25,10 @@ class Solution19 {
         char[][] data = new char[numRows][(s.length()/2)+1];
         StringBuilder result = new StringBuilder();
 
+        if(numRows == 1){
+            return s;
+        }
+
         int row = 0;
         int column = 0;
         boolean isDown = true;

@@ -25,4 +25,9 @@ class TestSolution19 {
 		assertEquals("A", solution19.convert("A", 1));
 	}
 
+	@Test
+	void testDoubleValue() {
+		assertEquals("AB", solution19.convert("AB", 1));
+	}
+
 }
