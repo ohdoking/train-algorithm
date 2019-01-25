@@ -22,7 +22,7 @@ package com.test;
  */
 class Solution19 {
     public String convert(String s, int numRows) {
-        char[][] data = new char[numRows][s.length()/2];
+        char[][] data = new char[numRows][(s.length()/2)+1];
         StringBuilder result = new StringBuilder();
 
         int row = 0;

@@ -16,10 +16,13 @@ class TestSolution19 {
 
 	@Test
 	void test() {
-//		assertEquals(3, solution1.solution(1111));
-//		assertEquals(0, solution1.solution(1));
 		assertEquals("PAHNAPLSIIGYIR", solution19.convert("PAYPALISHIRING", 3));
 		assertEquals("PINALSIGYAHRPI", solution19.convert("PAYPALISHIRING",4));
+	}
+
+	@Test
+	void testSingleValue() {
+		assertEquals("A", solution19.convert("A", 1));
 	}
 
 }
