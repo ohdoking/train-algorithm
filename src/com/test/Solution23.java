@@ -52,6 +52,9 @@ public class Solution23 {
 	}
 	public String findFirstPlace1(List<String[]> list){
 
+		/**
+		 * set graph from list
+		 */
 		Set<Graph> gSet = new HashSet<>();
 		for(String[] data : list){
 			Graph g = null;
@@ -83,11 +86,19 @@ public class Solution23 {
 			gSet.add(g2);
 
 		}
-		return findTheDepthest(gSet).getName();
+		/**
+		 * find the deepest node from Node Set
+		 */
+		return findTheDeepest(gSet).getName();
 	}
 
-	private Graph findTheDepthest(Set<Graph> gSet){
-		//DP
+	/**
+	 * find the Deepest Node
+	 * @param gSet
+	 * @return
+	 */
+	private Graph findTheDeepest(Set<Graph> gSet){
+		//DP(Dynamic Programming)
 		Map<String, Integer> map = new HashMap<>();
 		int theDepthest = 0;
 		Graph theDepthestGraph = null;
@@ -102,7 +113,14 @@ public class Solution23 {
 		return theDepthestGraph;
 	}
 
+	/**
+	 * calculate depth
+	 * @param graph
+	 * @param map
+	 * @return
+	 */
 	private int checkDepth(Graph graph, Map<String, Integer> map){
+		// if already calculate depth, return that value
 		if(map.containsKey(graph.getName())){
 			return map.get(graph.getName());
 		}
