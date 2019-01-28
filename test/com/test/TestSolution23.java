@@ -29,6 +29,7 @@ class TestSolution23 {
 		list.add(new String[] {"YourPlace","Munich"});
 		
 		assertEquals("YourPlace", solution23.findFirstPlace(list));
+		assertEquals("YourPlace", solution23.findFirstPlace1(list));
 		
 		
 	}
@@ -44,6 +45,7 @@ class TestSolution23 {
 		list.add(new String[] {"C","D"});
 		
 		assertEquals("A", solution23.findFirstPlace(list));
+		assertEquals("A", solution23.findFirstPlace1(list));
 		
 	}
 	
@@ -58,6 +60,7 @@ class TestSolution23 {
 		list.add(new String[] {"E","X"});
 		
 		assertEquals("F", solution23.findFirstPlace(list));
+		assertEquals("F", solution23.findFirstPlace1(list));
 		
 	}
 	

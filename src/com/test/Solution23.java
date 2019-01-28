@@ -1,6 +1,6 @@
 package com.test;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * You are given a list of trips that together form a journey from one place to another.
@@ -24,6 +24,106 @@ import java.util.List;
  *
  */
 public class Solution23 {
+	/**
+	 *
+	 * ----------------------------------- solution 1 start ---------------------------------------------
+	 *
+	 */
+	class Graph{
+		String name;
+		Graph nextDestination;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public Graph getNextDestination() {
+			return nextDestination;
+		}
+
+		public void setNextDestination(Graph nextDestination) {
+			this.nextDestination = nextDestination;
+		}
+
+	}
+	public String findFirstPlace1(List<String[]> list){
+
+		Set<Graph> gSet = new HashSet<>();
+		for(String[] data : list){
+			Graph g = null;
+			Graph g2 = null;
+			for(Graph graph : gSet){
+				if(graph.getNextDestination() != null){
+					if(data[0].equals(graph.getNextDestination().getName())){
+						g = graph;
+					}
+				}
+				if(data[1].equals(graph.getName())){
+					g2 = graph;
+				}
+			}
+
+			if(g == null){
+				g = new Graph();
+				g.setName(data[0]);
+			}
+
+			if(g2 == null){
+				g2 = new Graph();
+				g2.setName(data[1]);
+			}
+
+			g.setNextDestination(g2);
+
+			gSet.add(g);
+			gSet.add(g2);
+
+		}
+		return findTheDepthest(gSet).getName();
+	}
+
+	private Graph findTheDepthest(Set<Graph> gSet){
+		//DP
+		Map<String, Integer> map = new HashMap<>();
+		int theDepthest = 0;
+		Graph theDepthestGraph = null;
+		for(Graph graph : gSet){
+			int tempDepth = checkDepth(graph, map);
+			map.put(graph.getName(), tempDepth);
+			if(theDepthest < tempDepth){
+				theDepthestGraph = graph;
+				theDepthest = tempDepth;
+			}
+		}
+		return theDepthestGraph;
+	}
+
+	private int checkDepth(Graph graph, Map<String, Integer> map){
+		if(map.containsKey(graph.getName())){
+			return map.get(graph.getName());
+		}
+		if(graph.getNextDestination() != null){
+			return checkDepth(graph.getNextDestination(), map) + 1;
+		}
+		return 1;
+	}
+
+	/**
+	*
+	* ----------------------------------- solution 1 end ---------------------------------------------
+	*
+	*/
+
+	/**
+	*
+	* ----------------------------------- solution 2 start ---------------------------------------------
+	*
+	*/
+
 
 	/**
 	 * find a firstplace
@@ -55,5 +155,11 @@ public class Solution23 {
 		}
 		return true;
 	}
+
+	/**
+	 *
+	 * ----------------------------------- solution 2 end ---------------------------------------------
+	 *
+	 */
 
 }
