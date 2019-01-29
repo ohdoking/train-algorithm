@@ -104,6 +104,7 @@ public class Solution23 {
 		Graph theDepthestGraph = null;
 		for(Graph graph : gSet){
 			int tempDepth = checkDepth(graph, map);
+			//store data for decreasing time complex
 			map.put(graph.getName(), tempDepth);
 			if(theDepthest < tempDepth){
 				theDepthestGraph = graph;
