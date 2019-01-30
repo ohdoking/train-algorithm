@@ -65,12 +65,7 @@ class Solution25 {
 
         while(start < last){
             theHighestArea = Math.max(Math.min(height[start], height[last]) * (last - start),theHighestArea);
-            if(height[start] < height[last]){
-                start++;
-            }
-            else{
-                 last--;
-            }
+            int dummpy = height[start] < height[last] ? start++ : last--;
         }
 
         return theHighestArea;
