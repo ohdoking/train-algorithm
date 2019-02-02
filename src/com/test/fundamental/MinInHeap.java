@@ -30,7 +30,7 @@ public class MinInHeap {
     }
 
     /**
-     *
+     *  get the highest value in array
      */
     public int peek(){
         if(size == 0){
@@ -48,9 +48,9 @@ public class MinInHeap {
             throw new IllegalStateException();
         }
         int item = peek();
+        //Move the value of the last index to the first index.
         items[0] = items[size - 1];
         size--;
-
         heapifyDown();
         return item;
     }
@@ -100,8 +100,6 @@ public class MinInHeap {
         items[index2] = temp;
     }
 
-
-
     /**
      * check the array size and extend capacity
      */
@@ -112,13 +110,11 @@ public class MinInHeap {
         }
     }
 
-
     /**
      *
      * check tree(?)
      *
      */
-
     private int getLeftChildIndex(int parentIndex){
         return (2 * parentIndex) + 1;
     }
