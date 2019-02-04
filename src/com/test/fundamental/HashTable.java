@@ -1,11 +1,11 @@
 package com.test.fundamental;
 
-public class HashTable {
+public class HashTable<K, V> {
     private static int INITIAL_SIZE = 16;
-    private HashEntry[] entries = new HashEntry[INITIAL_SIZE];
-    public void put(String key, String value) {
+    private HashEntry<K,V>[] entries = new HashEntry[INITIAL_SIZE];
+    public void put(K key, V value) {
         int hash = getHash(key);
-        final HashEntry hashEntry = new HashEntry(key, value);
+        final HashEntry<K,V> hashEntry = new HashEntry<K,V>(key, value);
         if(entries[hash] == null) {
             entries[hash] = hashEntry;
         }
@@ -23,10 +23,10 @@ public class HashTable {
     /**
      * Returns 'null' if the element is not found.
      */
-    public String get(String key) {
+    public V get(K key) {
         int hash = getHash(key);
         if(entries[hash] != null) {
-            HashEntry temp = entries[hash];
+            HashEntry<K, V> temp = entries[hash];
 
             // Check the entry linked list for march
             // for the given 'key'
@@ -40,19 +40,19 @@ public class HashTable {
         return null;
     }
 
-    private int getHash(String key) {
+    private int getHash(K key) {
         // piggy backing on java string
         // hashcode implementation.
         return key.hashCode() % INITIAL_SIZE;
     }
 
-    public static class HashEntry {
-        String key;
-        String value;
+    public static class HashEntry<K, V> {
+        K key;
+        V value;
         // Linked list of same hash entries.
         HashEntry next;
 
-        public HashEntry(String key, String value) {
+        public HashEntry(K key, V value) {
             this.key = key;
             this.value = value;
             this.next = null;
@@ -60,7 +60,7 @@ public class HashTable {
 
         @Override
         public String toString() {
-            return "[" + key + ", " + value + "]";
+            return "[" + key.toString() + ", " + value.toString() + "]";
         }
     }
 
