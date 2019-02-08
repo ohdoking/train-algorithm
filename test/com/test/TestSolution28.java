@@ -40,4 +40,25 @@ public class TestSolution28 {
         assertEquals("LVIII", solution28.intToRoman(58));
     }
 
+    @Test
+    void testReverse() {
+        assertEquals(1, solution28.romanToInt("I"));
+        assertEquals(5, solution28.romanToInt("V"));
+        assertEquals(10, solution28.romanToInt("X"));
+    }
+
+    @Test
+    void testWithCompositeReverse(){
+        assertEquals(3, solution28.romanToInt("III"));
+        assertEquals(4, solution28.romanToInt("IV"));
+        assertEquals(8, solution28.romanToInt("VIII"));
+        assertEquals(9, solution28.romanToInt("IX"));
+    }
+
+    @Test
+    void testBigValueReverse(){
+        assertEquals(1994, solution28.romanToInt("MCMXCIV"));
+        assertEquals(58, solution28.romanToInt("LVIII"));
+    }
+
 }

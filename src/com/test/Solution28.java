@@ -1,5 +1,7 @@
 package com.test;
 
+import java.util.Arrays;
+
 /**
  * Integer to Roman
  *
@@ -76,5 +78,39 @@ class Solution28 {
             num -= temp * roman.getValue();
         }
         return result.toString();
+    }
+
+    /**
+     * Roman to Int Number
+     * @param s
+     * @return
+     */
+    public int romanToInt(String s) {
+
+
+        String[] arr = s.split("");
+
+        int result = 0 ;
+
+        for(Roman roman: Roman.values()){
+            while(arr.length != 0){
+                if(roman.name().length() > 1 && 1 < arr.length){
+                    if(roman.name().equals(arr[0].concat(arr[1]))){
+                        result += roman.getValue();
+                        arr = Arrays.copyOfRange(arr, 2, arr.length);
+                    }
+                }
+                else{
+                    if(roman.name().equals(arr[0])){
+                        result += roman.getValue();
+                        arr = Arrays.copyOfRange(arr, 1, arr.length);
+                        continue;
+                    }
+                }
+                break;
+            }
+        }
+
+        return result;
     }
 }
