@@ -20,7 +20,7 @@ class Solution29 {
         StringBuilder result = new StringBuilder();
 
         boolean state = true;
-        int index = 0;
+        
         Arrays.sort(strs, (a, b)-> a.length() - b.length());
         String standardString = strs[0];
 
