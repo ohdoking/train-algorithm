@@ -87,10 +87,8 @@ class Solution28 {
      */
     public int romanToInt(String s) {
 
-
         String[] arr = s.split("");
-
-        int result = 0 ;
+        int result = 0;
 
         for(Roman roman: Roman.values()){
             while(arr.length != 0){
@@ -104,6 +102,7 @@ class Solution28 {
                     if(roman.name().equals(arr[0])){
                         result += roman.getValue();
                         arr = Arrays.copyOfRange(arr, 1, arr.length);
+                        //roman number can write continuously until 3 letter.
                         continue;
                     }
                 }
