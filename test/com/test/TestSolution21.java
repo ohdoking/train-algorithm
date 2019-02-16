@@ -7,19 +7,23 @@ import org.junit.jupiter.api.Test;
 
 class TestSolution21 {
 	
-	Solution1 solution1;
+	Solution21 solution21;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		solution1 = new Solution1(); 
+		solution21 = new Solution21();
 	}
 
 	@Test
 	void test() {
-//		assertEquals(3, solution1.solution(1111));
-//		assertEquals(0, solution1.solution(1));
-		assertEquals(0, solution1.solution(2147483647));
-		assertEquals(1, solution1.solution(5));
+		assertEquals(321, solution21.reverse(123));
+		assertEquals(-321, solution21.reverse(-123));
+		assertEquals(21, solution21.reverse(120));
+	}
+
+	@Test
+	void testBigValue() {
+		assertEquals(0, solution21.reverse(1534236469));
 	}
 
 }
