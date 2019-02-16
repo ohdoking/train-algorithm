@@ -9,20 +9,20 @@ package com.test;
  */
 public class Solution26 {
 
-    class Node{
-        private int NUMBER_OF_CHARCTERS = 26;
-        Node[] children = new Node[NUMBER_OF_CHARCTERS];
+
+        private int NUMBER_OF_CHARACTERS = 26;
+        Solution26[] children = new Solution26[NUMBER_OF_CHARACTERS];
         int size = 0;
 
         private int getCharacterIndex(char c){
             return c - 'a';
         }
 
-        public Node getNode(char c){
+        public Solution26 getNode(char c){
             return children[getCharacterIndex(c)];
         }
 
-        public void setNode(char c, Node node){
+        public void setNode(char c, Solution26 node){
             children[getCharacterIndex(c)] = node;
         }
 
@@ -36,15 +36,27 @@ public class Solution26 {
                 return;
             }
             char current = s.charAt(index);
-            int charCode = getCharacterIndex(current);
-            Node child = getNode(current);
+            Solution26 child = getNode(current);
             if(child == null){
-                Node node = new Node();
-                setNode(current, node);
+                child = new Solution26();
+                setNode(current, child);
             }
-            child.add(s, index++);
+            child.add(s, index + 1);
+        }
 
+        public boolean contains(String s){
+            return contains(s, getNode(s.charAt(0)), 1);
+        }
 
+        public boolean contains(String s, Solution26 child, int index){
+            if(child == null){
+                if(s.length() == index){
+                    return true;
+                }
+                return false;
+            }
+            child = child.getNode(s.charAt(index));
+            return contains(s, child, index + 1);
         }
 
         public int findCount(String s, int index){
@@ -52,14 +64,11 @@ public class Solution26 {
                 return size;
             }
 
-            Node child = getNode(s.charAt(index));
+            Solution26 child = getNode(s.charAt(index));
             if(child == null){
                 return 0;
             }
 
-            return child.findCount(s, index++);
-
-
+            return child.findCount(s, index + 1);
         }
-    }
 }
