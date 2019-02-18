@@ -58,9 +58,8 @@ class Solution31 {
             String digit = next_digits.substring(0, 1);
             String[] letters = phone.get(digit);
             for (int i = 0; i < letters.length; i++) {
-                String letter = letters[i];
                 // append the current letter to the combination and proceed to the next digits
-                backtrack(combination + letter, next_digits.substring(1));
+                backtrack(combination + letters[i], next_digits.substring(1));
             }
         }
     }
