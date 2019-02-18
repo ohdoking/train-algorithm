@@ -2,6 +2,7 @@ package com.test;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  *
@@ -25,22 +26,22 @@ class Solution33 {
         }
         String[] strings = s.split("");
 
-        ArrayDeque<String> queue = new ArrayDeque();
+        Stack<String> stack = new Stack();
         for(String string : strings){
             if(isBracketDirection(string)){
-                queue.add(string);
+                stack.add(string);
             }
             else{
-                if(!queue.getLast().equals(reverseBracket(string))){
+                if(stack.size() == 0 || !stack.peek().equals(reverseBracket(string))){
                     return false;
                 }
                 else{
-                    queue.pollLast();
+                    stack.pop();
                 }
             }
         }
 
-        return queue.size() == 0 ? true : false;
+        return stack.size() == 0 ? true : false;
     }
 
     public boolean isBracketDirection(String bracket){
