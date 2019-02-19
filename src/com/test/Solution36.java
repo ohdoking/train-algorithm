@@ -16,6 +16,11 @@ import com.test.fundamental.ListNode;
  *
  * Given 1->2->3->4, you should return the list as 2->1->4->3.
  *
+ * ListNode n = head.next;
+ * head.next = swapPairs(head.next.next);
+ * n.next = head;
+ * return n;
+ *
  */
 class Solution36 {
     public ListNode swapPairs(ListNode head) {
