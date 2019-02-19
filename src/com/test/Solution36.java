@@ -15,10 +15,13 @@ import com.test.fundamental.ListNode;
  * Example:
  *
  * Given 1->2->3->4, you should return the list as 2->1->4->3.
- * 
+ *
  */
 class Solution36 {
     public ListNode swapPairs(ListNode head) {
+        if(head == null || head.getNext() == null){
+            return null;
+        }
         ListNode headNode = head.getNext();
         ListNode previousNode = null;
         while(true){

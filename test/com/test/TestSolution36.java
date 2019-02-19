@@ -37,4 +37,24 @@ class TestSolution36 {
         assertEquals(listNode1, solution36.swapPairs(listNode));
 
     }
+
+    @Test
+    public void whenNullThenNull(){
+
+        ListNode listNode = null;
+        ListNode listNode1 = null;
+
+        assertEquals(listNode1, solution36.swapPairs(listNode));
+
+    }
+
+    @Test
+    public void whenOneNodeThenReturnOneNode(){
+
+        ListNode listNode = new ListNode(1);
+        ListNode listNode1 = new ListNode(1);
+
+        assertEquals(listNode1, solution36.swapPairs(listNode));
+
+    }
 }
