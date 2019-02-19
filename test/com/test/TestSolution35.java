@@ -42,8 +42,8 @@ class TestSolution35 {
         innerList2.add(2);
         innerList2.add(3);
 
-        list.add(innerList);
         list.add(innerList2);
+        list.add(innerList);
 
         assertEquals(list, solution35.combinationSum(new int[]{2,3,6,7},7));
     }
@@ -78,9 +78,9 @@ class TestSolution35 {
         innerList3.add(3);
         innerList3.add(5);
 
-        list.add(innerList3);
-        list.add(innerList2);
         list.add(innerList);
+        list.add(innerList2);
+        list.add(innerList3);
 
 
         assertEquals(list, solution35.combinationSum(new int[]{2,3,5},8));
