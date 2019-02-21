@@ -51,7 +51,7 @@ package com.test;
  * 1  2  3
  * 4  5  6
  * 7  8  9
- * 
+ *
  * after transpose, it will be swap(matrix[i][j], matrix[j][i])
  *
  * 1  4  7
@@ -90,7 +90,6 @@ class Solution40 {
             return null;
         }
 
-        int[][] rotate = new int[matrix.length][matrix.length];
         int[] tempArray = new int[matrix.length * matrix.length];
 
         int index = 0;
@@ -103,11 +102,11 @@ class Solution40 {
         index = 0;
         for(int i = matrix.length - 1 ; i >= 0; i--){
             for(int j = 0 ; j < matrix.length ; j++){
-                rotate[j][i] = tempArray[index++];
+                matrix[j][i] = tempArray[index++];
             }
         }
 
-        return rotate;
+        return matrix;
 
     }
 }
