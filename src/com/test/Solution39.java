@@ -1,6 +1,7 @@
 package com.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -35,10 +36,8 @@ class Solution39 {
     }
 
     private String reorder(String str) {
-        return str.chars()
-                .sorted()
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-
+        char[] ca = str.toCharArray();
+        Arrays.sort(ca);
+        return String.valueOf(ca);
     }
 }
