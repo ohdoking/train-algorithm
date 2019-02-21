@@ -72,5 +72,5 @@ class TestSolution40 {
         }
     }
 
-    
+
 }
