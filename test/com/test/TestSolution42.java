@@ -16,7 +16,7 @@ class TestSolution42 {
     }
 
     @Test
-    public void test(){
+    public void whenKIsEvenThenResult(){
         //For k = 2, you should return: 2->1->4->3->5
         ListNode listNode = new ListNode(1);
         ListNode listNode2 = new ListNode(2);
@@ -45,7 +45,7 @@ class TestSolution42 {
     }
 
     @Test
-    public void test2(){
+    public void whenKIsOddThenResult(){
         //For k = 2, you should return: 2->1->4->3->5
         ListNode listNode = new ListNode(1);
         ListNode listNode2 = new ListNode(2);
@@ -70,6 +70,22 @@ class TestSolution42 {
 
         assertEquals(listNode1 ,solution42.reverseKGroup(listNode, 3));
 
+    }
+
+    @Test
+    public void whenKis1ThenResult(){
+        //For k = 2, you should return: 2->1->4->3->5
+        ListNode listNode = new ListNode(1);
+        ListNode listNode2 = new ListNode(2);
+        ListNode listNode3 = new ListNode(3);
+        ListNode listNode4 = new ListNode(4);
+        ListNode listNode5 = new ListNode(5);
+        listNode4.setNext(listNode5);
+        listNode3.setNext(listNode4);
+        listNode2.setNext(listNode3);
+        listNode.setNext(listNode2);
+
+        assertEquals(listNode ,solution42.reverseKGroup(listNode, 1));
 
     }
 }

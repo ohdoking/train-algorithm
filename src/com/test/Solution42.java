@@ -67,6 +67,9 @@ import java.util.Map;
  */
 class Solution42 {
     public ListNode reverseKGroup(ListNode head, int k) {
+        if(k == 1){
+            return head;
+        }
         int nth = 1;
         int count = 0;
         boolean state = true;
