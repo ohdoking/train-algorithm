@@ -67,23 +67,6 @@ import java.util.Map;
  */
 class Solution42 {
     public ListNode reverseKGroup(ListNode head, int k) {
-/**
- * For k = 3, 1->2->3->4->5->6->7, you should return: 3->2->1->6->5->4->7;
- *  *
- *  *   while
- *  *      nth = 1;
- *  *      count = 0;
- *  *          index 0(1 * 3 - 3) <-> 2(1 * 3 - 1) : 3->2->1->4->5->6->7;
- *  *          if count is same with (k/2)
- *  *              break;
- *  *      nth = 2;
- *  *      count = 0
- *  *          index 3(2 * 3 - 3) <-> 5(2 * 3 - 1) : 3->2->1->6->5->4->7;
- *  *          if count is same with (k/2)
- *  *              break;
- *  *
- *  *      if specific index is null, finish this while loop.
- */
         int nth = 1;
         int count = 0;
         boolean state = true;
@@ -102,9 +85,10 @@ class Solution42 {
                 }
                 count++;
             }
+            nth++;
         }
 
-        return head;
+        return map.get(0);
     }
 
     private void setMapFromListNode(ListNode head, Map<Integer, ListNode> map, int i) {
@@ -117,7 +101,7 @@ class Solution42 {
 
     private boolean swap(Map<Integer, ListNode> map, int i, int i1) {
         //if i1 is bigger than map size. we can't swap so this is wrong.
-        if(map.size() < i1){
+        if(map.size() <= i1){
             return false;
         }
 
@@ -129,9 +113,15 @@ class Solution42 {
 
             if(i != 0){
                 beforeNode.setNext(node);
+                map.put(i - 1, beforeNode);
             }
-            node1.setNext(node);
-            node.setNext(afterNode);
+            node.setNext(node1);
+            node1.setNext(afterNode);
+
+
+            map.put(i1, node1);
+            map.put(i, node);
+            map.put(i1 + 1, afterNode);
 
         }
         else{
@@ -141,8 +131,10 @@ class Solution42 {
 
             if(i != 0){
                 beforeNode.setNext(node);
+                map.put(i - 1, beforeNode);
             }
             node.setNext(afterNode);
+            map.put(i, node);
 
             ListNode beforeNode1 = map.get(i1 - 1);
             ListNode node1 =  map.get(i);
@@ -150,6 +142,11 @@ class Solution42 {
 
             beforeNode1.setNext(node1);
             node1.setNext(afterNode1);
+
+            map.put(i1 -1, beforeNode1);
+            map.put(i1, node1);
+            map.put(i1 + 1, afterNode1);
+
         }
 
 
