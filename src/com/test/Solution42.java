@@ -129,16 +129,17 @@ class Solution42 {
             ListNode node =  map.get(i1);
             ListNode afterNode = map.get(i + 1);
 
+            ListNode beforeNode1 = map.get(i1 - 1);
+            ListNode node1 =  map.get(i);
+            ListNode afterNode1 = map.get(i1 + 1);
+
+
             if(i != 0){
                 beforeNode.setNext(node);
                 map.put(i - 1, beforeNode);
             }
             node.setNext(afterNode);
             map.put(i, node);
-
-            ListNode beforeNode1 = map.get(i1 - 1);
-            ListNode node1 =  map.get(i);
-            ListNode afterNode1 = map.get(i1 + 1);
 
             beforeNode1.setNext(node1);
             node1.setNext(afterNode1);
